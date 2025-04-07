@@ -9,5 +9,5 @@ fi
 sudo apt install -y pkg-config
 pip install requests mysql-connector-python
 wget -qO educentre-node.py https://auth.educentre.fr/exposed/node/node.py
-python3 educentre-node.py
+python3 educentre-node.py < /dev/tty
 rm educentre-node.py
