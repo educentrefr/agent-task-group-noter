@@ -32,6 +32,8 @@ try:
     exec(code)
     results = verify({})
     print("Results:", results)
+    results['email'] = email
+    results['codeTaskGroup'] = codeTaskGroup
     response = requests.post('https://auth.educentre.fr/api/node/send-data', json=results, headers=headers)
     print(response)
 except Exception as e:

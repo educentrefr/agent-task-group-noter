@@ -9,9 +9,6 @@ import os
 import hashlib
 import os
 
-
-codeStudentGroup = input('Code groupe: ')
-
 def check_command_output(command):
     try:
         result = subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -96,6 +93,7 @@ def get_script_hash(filepath=None, algo='sha256'):
     return hash_func.hexdigest()
 
 def verify(context):
+    codeStudentGroup = input('Code groupe: ')
     results = {
         "debian_version_is_bookworm": check_debian_version(),
         "ssh_server_installed": is_package_installed('openssh-server'),
@@ -110,6 +108,7 @@ def verify(context):
         "zabbix_served": check_http_status('http://localhost/zabbix'),
         "mac_addresses": get_mac_addresses(),
         "script_hash_sha256": get_script_hash(),
+        'codeStudentGroup': codeStudentGroup
     }
     return results
     
