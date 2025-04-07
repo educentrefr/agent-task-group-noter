@@ -18,6 +18,9 @@ response = requests.post('https://auth.educentre.fr/api/login', json={
     'password': password
 }, headers=headers)
 result = response.json()
+if 'token' not in result:
+    print("Login failed. Please check your credentials.")
+    exit(1)
 headers['Authorization'] = 'Bearer ' + result['token']
 
 try:
