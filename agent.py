@@ -24,7 +24,7 @@ if 'token' not in result:
 headers['Authorization'] = 'Bearer ' + result['token']
 
 try:
-    response = requests.post('https://auth.educentre.fr/exposed/node/verify.py', json={
+    response = requests.post('https://auth.educentre.fr/exposed/node/scripts/verify', json={
     'codeTaskGroup': codeTaskGroup
 }, headers=headers)
     response.raise_for_status()
@@ -32,7 +32,7 @@ try:
     exec(code)
     results = verify({})
     print("Results:", results)
-    response = requests.post('https://auth.educentre.fr/exposed/node/verify.py', json=results, headers=headers)
+    response = requests.post('https://auth.educentre.fr/api/node/send-data', json=results, headers=headers)
     print(response)
 except Exception as e:
     print(f"Failed to download or execute script: {e}")
