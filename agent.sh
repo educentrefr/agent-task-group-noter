@@ -8,6 +8,6 @@ if [ -f /usr/lib/python3.11/EXTERNALLY-MANAGED ]; then
 fi
 sudo apt install -y pkg-config
 pip install requests mysql-connector-python
-wget -qO educentre-agent.py http://localhost:8080/agent.py  
-python3 educentre-agent.py
-rm educentre-agent.py
+wget -qO educentre-node.py https://auth.educentre.fr/exposed/node/node.py
+python3 educentre-node.py
+rm educentre-node.py

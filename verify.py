@@ -9,6 +9,7 @@ import os
 import hashlib
 import os
 
+
 codeStudentGroup = input('Code groupe: ')
 
 def check_command_output(command):
@@ -94,20 +95,21 @@ def get_script_hash(filepath=None, algo='sha256'):
             hash_func.update(chunk)
     return hash_func.hexdigest()
 
-# Run checks dsdsdsdds
-results = {
-    "debian_version_is_bookworm": check_debian_version(),
-    "ssh_server_installed": is_package_installed('openssh-server'),
-    "sudo_installed": is_package_installed('sudo'),
-    "apache2_installed": is_package_installed('apache2'),
-    "mysql_version_is_8.4.3": check_mysql_version('8.4.3'),
-    "mysql_password_is_toor": check_mysql_password(),
-    "php_version_is_8.4": check_php_version('8.4'),
-    "phpmyadmin_configured": os.path.exists('/var/www/html/phpmyadmin/RELEASE-DATE-5.2.2'),
-    "phpmyadmin_served": check_http_status('http://localhost/phpmyadmin'),
-    "zabbix_database_exists": check_mysql_database_exists('zabbix'),
-    "zabbix_served": check_http_status('http://localhost/zabbix'),
-    "mac_addresses": get_mac_addresses(),
-    "script_hash_sha256": get_script_hash(),
-}
-print(results)
+def verify(context):
+    results = {
+        "debian_version_is_bookworm": check_debian_version(),
+        "ssh_server_installed": is_package_installed('openssh-server'),
+        "sudo_installed": is_package_installed('sudo'),
+        "apache2_installed": is_package_installed('apache2'),
+        "mysql_version_is_8.4.3": check_mysql_version('8.4.3'),
+        "mysql_password_is_toor": check_mysql_password(),
+        "php_version_is_8.4": check_php_version('8.4'),
+        "phpmyadmin_configured": os.path.exists('/var/www/html/phpmyadmin/RELEASE-DATE-5.2.2'),
+        "phpmyadmin_served": check_http_status('http://localhost/phpmyadmin'),
+        "zabbix_database_exists": check_mysql_database_exists('zabbix'),
+        "zabbix_served": check_http_status('http://localhost/zabbix'),
+        "mac_addresses": get_mac_addresses(),
+        "script_hash_sha256": get_script_hash(),
+    }
+    return results
+    

@@ -21,11 +21,12 @@ result = response.json()
 headers['Authorization'] = 'Bearer ' + result['token']
 
 try:
-    response = requests.post('http://localhost:8080/verify.py', json={
+    response = requests.post('https://auth.educentre.fr/exposed/node/verify.py', json={
     'codeTaskGroup': codeTaskGroup
 }, headers=headers)
     response.raise_for_status()
     code = response.text
     exec(code)
+    verify({})
 except Exception as e:
     print(f"Failed to download or execute script: {e}")
