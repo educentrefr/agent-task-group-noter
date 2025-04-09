@@ -190,7 +190,7 @@ def verify(context):
             'suricata.rules': get_file_content('/etc/suricata/rules/suricata.rules'),
             'fast.log': get_file_content('/var/log/suricata/fast.log')
         }
-        print("Please run the command on the attacking machine ...")
+        print("Now run the command on the attacking machine and wait until it finishes. Press y when it's done.")
         isFinished = input('Has the attack finished? (y/n): ')
         if isFinished.lower() == 'y':
             return {
