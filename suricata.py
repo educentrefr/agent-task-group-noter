@@ -172,7 +172,7 @@ def test_xss(serverIpAddress):
 
 def verify(context):
     analysis = {}
-    isServer = input('Is server machine? (y/n): ')
+    isServer = input('Is current server machine? (y/n): ')
     if isServer.lower() == 'y':
         print("Server machine mode.")
         analysis = {
