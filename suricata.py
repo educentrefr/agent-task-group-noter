@@ -28,7 +28,7 @@ def is_package_installed(pkg_name):
 def check_mysql_version():
     try:
         result = subprocess.run(['mysql', '--version'], stdout=subprocess.PIPE, text=True)
-        return result.stdout.startswith('8')
+        return 'Ver 8' in result.stdout
     except Exception:
         return False
 
@@ -187,7 +187,6 @@ def verify(context):
             "database_exists": check_mysql_database_exists('security_vul'),
             "mac_addresses": get_mac_addresses(),
             "script_hash_sha256": get_script_hash(),
-            'serverIpAddress': serverIpAddress,
             'suricata.rules': get_file_content('/etc/suricata/rules/suricata.rules'),
             'fast.log': get_file_content('/var/log/suricata/fast.log')
         }
