@@ -24,7 +24,7 @@ if 'token' not in result:
 headers['Authorization'] = 'Bearer ' + result['token']
 
 try:
-    response = requests.post('https://auth.educentre.fr/exposed/node/scripts/verify', json={
+    response = requests.post('https://auth.educentre.fr/api/node/scripts/task-groups/' + codeTaskGroup, json={
     'codeTaskGroup': codeTaskGroup
 }, headers=headers)
     response.raise_for_status()
