@@ -115,7 +115,7 @@ def verify(context):
         "glpi_installed": check_mysql_database_exists('glpi'),
         "mac_addresses": get_mac_addresses(),
         "script_hash_sha256": get_script_hash(),
-        'script.sh': get_file_content('~/script.sh'),
+        'script.sh': get_file_content('./script.sh'),
         'current_time': context['current_time'],
     }
     return results
