@@ -8,6 +8,7 @@ import struct
 import os
 import hashlib
 import os
+import json
 
 def check_command_output(command):
     try:
@@ -101,6 +102,7 @@ def get_file_content(filepath):
         return None
 
 def verify(context):
+    current_time = subprocess.check_output(['date', '+%Y-%m-%d %H:%M:%S']).decode('utf-8').strip()
     results = {
         "debian_version_is_bookworm": check_debian_version(),
         "ssh_server_installed": is_package_installed('openssh-server'),
@@ -114,7 +116,11 @@ def verify(context):
         "glpi_installed": check_mysql_database_exists('glpi'),
         "mac_addresses": get_mac_addresses(),
         "script_hash_sha256": get_script_hash(),
-        'script.sh': get_file_content('~/script.sh')
+        'script.sh': get_file_content('~/script.sh'),
+        'current_time': current_time
     }
+    current_time = re.sub(r'[^a-zA-Z0-9]', '-', current_time)
+    with open(f'glpi_{current_time}.json', 'w') as f:
+        json.dump(results, f, indent=4)
     return results
     
