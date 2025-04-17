@@ -1,5 +1,6 @@
 import requests
 import getpass
+import json, subprocess, re
 
 headers = {
     'User-Agent': (
@@ -30,7 +31,13 @@ try:
     response.raise_for_status()
     code = response.text
     exec(code)
-    results = verify({})
+    current_time = subprocess.check_output(['date', '+%Y-%m-%d %H:%M:%S']).decode('utf-8').strip()
+    results = verify({
+        'current_time': current_time,
+    })
+    current_time = re.sub(r'[^a-zA-Z0-9]', '-', current_time)
+    with open(f'node_{current_time}.json', 'w') as f:
+        json.dump(results, f, indent=4)
     print("Results:", results)
     results['email'] = email
     results['codeTaskGroup'] = codeTaskGroup
